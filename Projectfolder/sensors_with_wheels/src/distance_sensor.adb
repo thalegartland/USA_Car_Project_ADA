@@ -1,5 +1,24 @@
 
 package body Distance_sensor is
+   
+   protected body Sensor_flag is
+      
+      procedure Set (Value : Boolean) is
+      begin
+         
+         Flag_value := Value;
+         
+      end Set;
+      
+      function Get return Boolean is
+      begin
+         
+         return Flag_value;
+      
+      end Get;
+      
+   end Sensor_flag;
+         
 
    procedure Trigger (Trigger_pin_val : MicroBit.IOsForTasking.Pin_Id) is
 
@@ -41,12 +60,38 @@ package body Distance_sensor is
       
    end Echo;
    
-   function Measure_distance (Trigger_pin_val : MicroBit.IOsForTasking.Pin_Id; Echo_pin_val : MicroBit.IOsForTasking.Pin_Id) return Float is
+   
+   function Proximity_warning return Boolean is
    begin
       
-      Trigger (Trigger_pin_val);
-      return Echo(Echo_pin_val);
+      if Echo(1) < 30.0 then
+         
+         return True;
+         
+      else
+         
+         return False;     
+         
+      end if;
+                    
+   end Proximity_warning;
+   
+   
+   task body Sensor_loop is
       
-   end Measure_distance;
+     Start_time : Ada.Real_Time.Time;
+      
+   begin
+         
+      loop
+         
+         Start_time := Ada.Real_Time.Clock;
+        
+         Trigger(0);
+         Sensor_flag.Set(Proximity_warning);
+                  
+   end loop;
+      
+   end Sensor_loop;
    
 end Distance_sensor;
