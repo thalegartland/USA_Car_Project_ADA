@@ -3,3 +3,8 @@
 
 # Ada Library Information
 *.ali
+
+# Ignore obj folder
+obj/
+
+lib/

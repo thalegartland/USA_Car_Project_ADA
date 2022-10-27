@@ -1,0 +1,2 @@
+drive.adb:8:10: error: invalid prefix in selected component "Car_a"
+drive.adb:8:15: error: prefixed call is only allowed for objects of a tagged type
