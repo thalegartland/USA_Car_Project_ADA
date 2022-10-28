@@ -3,14 +3,14 @@ package body Distance_sensor is
    
    protected body Sensor_flag is
       
-      procedure Set (Value : Boolean) is
+      procedure Set (Value : Boolean) is                                        --To set the value of Flag_value          
       begin
          
          Flag_value := Value;
          
       end Set;
       
-      function Get return Boolean is
+      function Get return Boolean is                                            --To return the value of Flag_value
       begin
          
          return Flag_value;
@@ -22,8 +22,10 @@ package body Distance_sensor is
 
    procedure Trigger (Trigger_pin_val : MicroBit.IOsForTasking.Pin_Id) is
 
-      Signal_duration : constant Ada.Real_Time.Time_Span := Ada.Real_Time.Microseconds(10);
-      Delay_time : Ada.Real_Time.Time := Ada.Real_Time.Clock + Signal_duration;
+      Signal_duration : constant Ada.Real_Time.Time_Span 
+        := Ada.Real_Time.Microseconds(10);
+      Delay_time : Ada.Real_Time.Time 
+        := Ada.Real_Time.Clock + Signal_duration;
       
    begin
       
@@ -42,26 +44,27 @@ package body Distance_sensor is
    begin
       MicroBit.IOsForTasking.Set(Echo_pin_val, True);
       
-      while MicroBit.IOsForTasking.Set(Echo_pin_val) = False loop
-         
+      while MicroBit.IOsForTasking.Set(Echo_pin_val) = False loop               --Updates Initial_time value until 
+                                                                                --confirmed that echo pin set to 1.
          Initial_time := Ada.Real_Time.Clock;
          
       end loop;
       
-      while MicroBit.IOsForTasking.Set(Echo_pin_val) loop
-         
-         Final_time := Ada.Real_Time.Clock;
-         
+      while MicroBit.IOsForTasking.Set(Echo_pin_val) loop                       --Updates Final_time value until
+                                                                                --signal confirmed returned, which
+         Final_time := Ada.Real_Time.Clock;                                     --is indicated by echo pin returning
+                                                                                --to 0.
       end loop;
       
-      Distance_detected := Float(To_Duration((34300*(Final_time - Initial_time))/2));
-      
+      Distance_detected := 
+        Float(To_Duration((34300*(Final_time - Initial_time))/2));              --Calculates distance travelled
+                                                                                --using time measured.
       return Distance_detected;
       
    end Echo;
    
    
-   function Proximity_warning return Boolean is
+   function Proximity_test return Boolean is
    begin
       
       if Echo(1) < 30.0 then
@@ -74,23 +77,19 @@ package body Distance_sensor is
          
       end if;
                     
-   end Proximity_warning;
+   end Proximity_test;
    
    
    task body Sensor_loop is
       
-     Start_time : Ada.Real_Time.Time;
-      
    begin
          
       loop
-         
-         Start_time := Ada.Real_Time.Clock;
         
          Trigger(0);
-         Sensor_flag.Set(Proximity_warning);
+         Sensor_flag.Set(Proximity_test);
                   
-   end loop;
+      end loop;
       
    end Sensor_loop;
    
