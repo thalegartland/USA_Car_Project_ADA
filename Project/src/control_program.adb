@@ -35,7 +35,7 @@ package body Control_Program is
          else
             Wheels.Drive_forward(Car);
          end if;
-         delay until Clock + Milliseconds(10);
+         delay until Clock + Microseconds(100);
       end loop;
       
    end Stop_Car;

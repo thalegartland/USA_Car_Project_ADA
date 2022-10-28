@@ -1,12 +1,19 @@
 with Wheel;
 
 package Wheels is
+   -- Pwm_pin, Forward_pin, Backward_pin
    type Set_of_wheels is record
-      Front_left_wheel : Wheel.Single_wheel  := (14,13,12);
-      Front_right_wheel : Wheel.Single_wheel  := (0,2,3);
-      Back_left_wheel : Wheel.Single_wheel  := (15,10,11);
+    --  Front_left_wheel : Wheel.Single_wheel  := (14,13,12);
+    --  Front_right_wheel : Wheel.Single_wheel  := (0,2,3);
+    --  Back_left_wheel : Wheel.Single_wheel  := (15,10,11);
+    --  Back_right_wheel : Wheel.Single_wheel  := (1,6,7);
+      
+      Front_left_wheel : Wheel.Single_wheel  := (0,12,13); --kan være 14 og 15 må byttes om
+      Front_right_wheel : Wheel.Single_wheel  := (1,2,3);
+      Back_left_wheel : Wheel.Single_wheel  := (0,14,15); --kan være 14 og 15 må byttes om
       Back_right_wheel : Wheel.Single_wheel  := (1,6,7);
    end record;
+   -- Byttet om 12 og 14, 13 og 15
    
    procedure Drive_forward (Self : Set_of_wheels);
    procedure Drive_backwards (Self : Set_of_wheels);
