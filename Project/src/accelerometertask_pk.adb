@@ -16,12 +16,14 @@ package body AccelerometerTask_pk is
       Data: All_Axes_Data;
       Threshold : constant := 179;
       Overturned : Boolean := false;
+      --Time_Now : Time;
       
    begin 
       --accept Start;
       
    
       loop
+         --Time_Now := Clock;
 
             --  Read the accelerometer data
             Data := MicroBit.Accelerometer.AccelData;
@@ -58,12 +60,12 @@ package body AccelerometerTask_pk is
              Overturned := True;
 
             elsif Data.Y < -Threshold then
-              MicroBit.DisplayRT.Symbols.Smile;
+            --  MicroBit.DisplayRT.Symbols.Smile;
                --Arrow down
                --Returner 1
               Overturned := False;
             else
-               MicroBit.DisplayRT.Symbols.Cross;
+              -- MicroBit.DisplayRT.Symbols.Cross;
                --Returner 0
               Overturned := True;
 

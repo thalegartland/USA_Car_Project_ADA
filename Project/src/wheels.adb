@@ -91,22 +91,22 @@ package body Wheels is
    end Rotate_clockwise;
    
    
-   procedure sideways_left (Self : Set_of_wheels) is
+   procedure Sideways_Left (Self : Set_of_wheels) is
    begin
-      Self.Front_left_wheel.Rotate_backwards;
-      Self.Front_right_wheel.Rotate_forwards;
-      Self.Back_left_wheel.Rotate_forwards;
-      Self.Back_right_wheel.Rotate_backwards;
-   end sideways_left;
-   
-   
-   procedure sideways_right (Self : Set_of_wheels) is
-   begin  
       Self.Front_left_wheel.Rotate_forwards;
       Self.Front_right_wheel.Rotate_backwards;
       Self.Back_left_wheel.Rotate_backwards;
       Self.Back_right_wheel.Rotate_forwards;
-   end sideways_right;
+   end Sideways_Left;
+   
+   
+   procedure Sideways_Right (Self : Set_of_wheels) is
+   begin  
+      Self.Front_left_wheel.Rotate_backwards;
+      Self.Front_right_wheel.Rotate_forwards;
+      Self.Back_left_wheel.Rotate_forwards;
+      Self.Back_right_wheel.Rotate_backwards;
+   end Sideways_Right;
    
    
    procedure Lateral_arc_anticlockwise (Self : Set_of_wheels) is
