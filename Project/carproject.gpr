@@ -1,4 +1,4 @@
-with "..\..\Ada_Drivers_Library\boards\MicroBit_v2\microbit_v2_full.gpr";
+limited with "..\..\Ada_Drivers_Library\boards\MicroBit_v2\microbit_v2_full.gpr";
 
 project Carproject is
 

@@ -43,18 +43,19 @@ package body Distance_sensor is
    end Echo;
    
    task body Sensor_loop is  
-      --Time_Now : Time;
+      Time_Now : Time;
    begin
       loop
-         --Time_Now := Clock;
+         Time_Now := Clock;
          Trigger(10);
-         if Echo(4) < 30.0 then
+         if Echo(4) < 12.0 then
+            
             Sensor_flag.Set(True);
          else
             Sensor_flag.Set(False);   
          end if;
          
-         delay until Clock + Milliseconds(10);
+         delay until Time_Now + Milliseconds(20);
       end loop;
       
    end Sensor_loop;
