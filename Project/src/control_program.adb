@@ -5,8 +5,15 @@ with Acc_Storage_pk;
 with Ada.Real_Time; use Ada.Real_Time;
 
 package body Control_Program is
+   
+   -- This is the states the car can have:
+   --     forward
+   --     turn_right
+   --     turned
    type move_state is (forward, turn_right, turned);
-   task body Stop_Car is
+   
+   
+   task body Control_Car is
       Car : Wheels.Set_of_wheels;
       current_state : move_state := forward;
       Time_Now : Time;
@@ -41,7 +48,7 @@ package body Control_Program is
          delay until Clock + Milliseconds(5);
       end loop;
       
-   end Stop_Car;
+   end Control_Car;
    
 
   

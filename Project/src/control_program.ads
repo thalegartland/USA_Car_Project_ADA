@@ -7,8 +7,6 @@
 
 package control_program is
    
-   --task Input_Distance_Sensor with Priority => 2;
-   --task Normal_Behaviour with Priority => 3;
-   task Stop_Car with Priority => 2;
+   task Control_Car with Priority => 2;
    
 end control_program;

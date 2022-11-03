@@ -49,12 +49,10 @@ package body Distance_sensor is
          Time_Now := Clock;
          Trigger(10);
          if Echo(4) < 12.0 then
-            
             Sensor_flag.Set(True);
          else
             Sensor_flag.Set(False);   
          end if;
-         
          delay until Time_Now + Milliseconds(20);
       end loop;
       
