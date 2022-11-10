@@ -12,6 +12,7 @@ with Acc_Storage_pk;
 
 package body AccelerometerTask_pk is
 
+   -- What does this task do?
    task body AccelerometerTask is 
       Data: All_Axes_Data;
       
@@ -46,7 +47,7 @@ package body AccelerometerTask_pk is
                Overturned := True;
 
              elsif Data.Y > Threshold then
-               DisplayRT.Symbols.Cross;
+               MicroBit.DisplayRT.Symbols.Cross;
              Overturned := True;
 
             elsif Data.Y < -Threshold then
