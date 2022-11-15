@@ -29,7 +29,7 @@ The program is designed with four different tasks:
 The interaction between the different tasks is captured in the image below. 
 ![SoftwareDiagram](https://user-images.githubusercontent.com/69819933/201891176-b20fb396-03d2-4d97-a486-bcde1c75ee90.png)
 
-The Control Program Task connects and controls the other tasks and the different states of the car movement. The car have three different states: Forward, Turned, Turn_Right. The image below shows the interaction between the different states. 
+The Control Program Task connects and controls the other tasks and the different states of the car movement. The car have three different states: Forward, Turned, Turn_Right. The image below shows the state diagram. 
 
 ![StateDiagram](https://user-images.githubusercontent.com/69819933/201891957-e92f748a-f17a-4a61-8a55-e1f10b9e679b.png)
 
