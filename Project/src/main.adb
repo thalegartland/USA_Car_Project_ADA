@@ -1,9 +1,9 @@
 with control_program;
-with Wheels;
+--with Wheels;
 --with distance_sensor;
-with AccelerometerTask_pk;
-with Acc_Storage_pk;
-with distance_sensor_storage_pk;
+--with AccelerometerTask_pk;
+--with Acc_Storage_pk;
+--with distance_sensor_storage_pk;
 
 procedure Main with Priority => 0 is
 

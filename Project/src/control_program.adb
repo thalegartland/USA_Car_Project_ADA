@@ -26,7 +26,7 @@ package body Control_Program is
       Time_Now : Time;
       Time_next : Time;
       -- The variable D is used to control how long time the car shall turn right. 
-      D : Time_Span := Seconds (2);
+      D : Time_Span := Milliseconds (1700);
    begin
       loop
          -- This case statement is used to set the states that control the movements to the car. 
