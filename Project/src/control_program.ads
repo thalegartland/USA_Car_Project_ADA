@@ -2,6 +2,6 @@
 
 package control_program is
    
-   task Control_Car with Priority => 2;
+   task Control_Car with Priority => 1;
    
 end control_program;

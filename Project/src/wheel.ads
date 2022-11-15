@@ -1,3 +1,4 @@
+--This package contains the functionality for a single wheel. It provides the ability to instruct each individual wheel to rotate forwards or backwards and stop. 
 with MicroBit.IOsForTasking;
 
 package Wheel is

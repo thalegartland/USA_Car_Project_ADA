@@ -34,22 +34,16 @@ package body Distance_sensor is
       
    end Echo;
    -- This task retrieves and processes the data from the distance sensor HC-SR04
-   task body Sensor_loop is  
-      -- The variable Time_Now is a time varibale that are used to... 
-      Time_Now : Time;
+   task body Sensor_loop is
+      Time_Now : Time;                                                          -- The variable Time_Now is a time varibale that are used to... 
    begin
-      loop
-         -- Here the Time_Now variable is set to the time of the clock of the start of the loop. 
-         Time_Now := Clock;
-           -- Here the Trigger procedure are used and the pin 10 is the input variable. 
-           Trigger(10);
-         -- The if loop use the Echo function to chech if the distance between the sensor and a object in front is less than 12cm. 
-         if Echo(4) < 12.0 then
-            -- If the distance is less than 12cm the value of the protected object sensor_flag is set true. 
-            distance_sensor_storage_pk.sensor_flag.Set(True);
-         else
-            -- If the distance is not less than 12c the value of the protected object sensor_flag is set flase. 
-            distance_sensor_storage_pk.Sensor_flag.Set(False);   
+      loop 
+         Time_Now := Clock;                                                     -- Here the Time_Now variable is set to the time of the clock of the start of the loop. 
+           Trigger(10);                                                         -- Here the Trigger procedure are used and the pin 10 is the input variable. 
+         if Echo(4) < 12.0 then                                                 -- The if loop use the Echo function to chech if the distance between the sensor and a object in front is less than 12cm. 
+            distance_sensor_storage_pk.sensor_flag.Set(True);                   -- If the distance is less than 12cm the value of the protected object sensor_flag is set true.
+         else 
+            distance_sensor_storage_pk.Sensor_flag.Set(False);                  -- If the distance is not less than 12c the value of the protected object sensor_flag is set flase.
          end if;
          -- Her må det skrives noe om dealyet og hvorfor det er sånn. 
          delay until Time_Now + Milliseconds(20);
