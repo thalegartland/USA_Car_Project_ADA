@@ -14,6 +14,8 @@ package Wheels is
    end record;
    
    procedure Drive_forward (Self : Set_of_wheels);
+   procedure Brake (Self : Set_of_wheels);
+   procedure Rotate_clockwise (Self : Set_of_wheels);
  --  procedure Drive_backwards (Self : Set_of_wheels);
  --  procedure Forward_left (Self : Set_of_wheels);
  --  procedure Forward_right (Self : Set_of_wheels);
@@ -22,12 +24,11 @@ package Wheels is
  --  procedure Turn_left (Self : Set_of_wheels);
  --  procedure Turn_right (Self : Set_of_wheels);
  --  procedure Rotate_anticlockwise (Self : Set_of_wheels);
-   procedure Rotate_clockwise (Self : Set_of_wheels);
  --  procedure Sideways_Left (Self : Set_of_wheels);
  --  procedure Sideways_Right (Self : Set_of_wheels);
  --  procedure Lateral_arc_anticlockwise (Self : Set_of_wheels);
  --  procedure Lateral_arc_clockwise (Self : Set_of_wheels);
-   procedure Brake (Self : Set_of_wheels);
+
 
    
 
