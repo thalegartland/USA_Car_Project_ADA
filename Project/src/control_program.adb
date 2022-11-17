@@ -18,25 +18,32 @@ package body Control_Program is
    -- The task use a case statement to switch between the state to the car. 
    task body Control_Car is
       Car : Wheels.Set_of_wheels;                                               -- The car variable define the car in wheels.
-      current_state : move_state := forward;                                    -- Before the loop in the task start the current_state to the car must be set to forward. 
-      Time_Now : Time;                                                          -- The variable Time_Now and time_next is a time variable that is used in the case to control 
-      Time_next : Time;                                                         -- how long time the car shall turn right after the dictance sensor has detected something in front of the car. 
-      D : Time_Span := Milliseconds (1700);                                     -- The variable D is used to control how long time the car shall turn right.
+      current_state : move_state := forward;  -- Before the loop in the task start the current_state to the car must be set to forward. 
+      Time_Now : Time;                        -- The variable Time_Now and time_next is a time variable that is used in the case to control 
+      Time_next : Time;                       -- how long time the car shall turn right after the dictance sensor has detected something in front of the car. 
+      D : Time_Span := Milliseconds (1700);   -- The variable D is used to control how long time the car shall turn right.
    begin
       loop
          -- This case statement is used to set the states that control the movements to the car. 
+        
          case current_state is 
-            when forward =>                                                     -- The forward case set the car to drive forward.
+            -- The forward case set the car to drive forward.
+            -- If the accelerometer detect that the car has overturned the current_state is set to turned. 
+            -- If the distance sensor detect something in front the Time_Next variable is set to the clock time plus the D variable.
+            -- Then the current_state is switched to turn_right.
+            -- Now it has been determined that everything is OK. We repeatedly will tell the wheels to move forward.
+            when forward =>                   
                Wheels.Drive_forward(Car);
-               if not(Acc_Storage_pk.storage.get_upright) then                  -- If the accelerometer detect that the car has overturned the current_state is set to turned. 
+               if not(Acc_Storage_pk.storage.get_upright) then 
                   current_state := turned; 
-               elsif distance_sensor_storage_pk.Sensor_flag.Get  then           -- If the distance sensor detect something in front the Time_Next variable is set to the clock time plus the D variable.
+               elsif distance_sensor_storage_pk.Sensor_flag.Get  then  
                   Time_Next := Clock + D;   
-                  current_state := turn_right;                                  -- Then the current_state is switched to turn_right.
+                  current_state := turn_right;  
                else
-                  Wheels.Drive_forward(Car);                                    -- Now it has been determined that everything is OK. We repeatedly will tell the wheels to move forward.
+                  Wheels.Drive_forward(Car);                                    
                end if;
-            when turn_right =>                                                  -- The turn_right case set the car to rotate clockwise. 
+            -- The turn_right case set the car to rotate clockwise.
+            when turn_right =>                                                   
                Wheels.Rotate_clockwise(car); 
                if not(Acc_Storage_pk.storage.get_upright) then                  -- If the accelerometer detect that the car has overturned the current_stat is set to turned.
                   current_state := turned;
