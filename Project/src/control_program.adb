@@ -17,8 +17,10 @@ package body Control_Program is
    task body Control_Car is
       Car : Wheels.Set_of_wheels;             -- The car variable define the car in wheels.
       current_state : move_state := forward;  -- Before the loop in the task start the current_state to the car must be set to forward. 
-      Time_Now : Time;                        -- The variable Time_Now and time_next is a time variable that is used in the case to control 
-      Time_next : Time;                       -- how long time the car shall turn right after the dictance sensor has detected something in front of the car. 
+      
+      -- The variable Time_Now and Time_next is used to control how long the car turns to the right after detection
+      Time_Now : Time;                        
+      Time_next : Time;                       
       D : Time_Span := Milliseconds (1700);   -- The variable D is used to control how long time the car shall turn right.
    begin
       loop

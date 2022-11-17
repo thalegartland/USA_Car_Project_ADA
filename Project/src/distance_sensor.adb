@@ -1,4 +1,4 @@
---This package bpdy includes the decleration of the procedure Trigger, the function Echo and the task Sensor_loop. 
+--This package body includes the decleration of the procedure Trigger, the function Echo and the task Sensor_loop. 
 --The protected object is between the task Sensor_loop and the protected object Sensor_flag.
 
 package body Distance_sensor is
