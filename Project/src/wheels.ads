@@ -5,8 +5,10 @@
 with Wheel;
 
 package Wheels is
-   -- Pwm_pin, Forward_pin, Backward_pin
-   type Set_of_wheels is record                                                 -- Creates a set of wheels as a type and sets each set 
+   
+   -- Creates a set of wheels as a type and sets each set
+   -- Each number on the pin is in this order: Pwm_pin, Forward_pin, Backward_pin
+   type Set_of_wheels is record                                                  
       Front_left_wheel : Wheel.Single_wheel  := (0,6,7);
       Front_right_wheel : Wheel.Single_wheel  := (1,12,13);
       Back_left_wheel : Wheel.Single_wheel  := (0,14,15);
@@ -28,8 +30,5 @@ package Wheels is
  --  procedure Sideways_Right (Self : Set_of_wheels);
  --  procedure Lateral_arc_anticlockwise (Self : Set_of_wheels);
  --  procedure Lateral_arc_clockwise (Self : Set_of_wheels);
-
-
-   
 
 end Wheels;

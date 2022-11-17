@@ -7,17 +7,15 @@ with Ada.Real_Time; use Ada.Real_Time;
 
 package body Control_Program is
    
-   -- This is the states the car can have:
-   --     forward
-   --     turn_right
-   --     turned
+   -- This is the states the car can have: forward, turn_right, turned
    type move_state is (forward, turn_right, turned);
    
    -- The task Control_Car is a task that get in the infromation from the sensor task and control the movements to the car. 
    -- By processing this data, this task set the state of what the car shall do. 
    -- The task use a case statement to switch between the state to the car. 
+   
    task body Control_Car is
-      Car : Wheels.Set_of_wheels;                                               -- The car variable define the car in wheels.
+      Car : Wheels.Set_of_wheels;             -- The car variable define the car in wheels.
       current_state : move_state := forward;  -- Before the loop in the task start the current_state to the car must be set to forward. 
       Time_Now : Time;                        -- The variable Time_Now and time_next is a time variable that is used in the case to control 
       Time_next : Time;                       -- how long time the car shall turn right after the dictance sensor has detected something in front of the car. 
@@ -27,6 +25,7 @@ package body Control_Program is
          -- This case statement is used to set the states that control the movements to the car. 
         
          case current_state is 
+            
             -- The forward case set the car to drive forward.
             -- If the accelerometer detect that the car has overturned the current_state is set to turned. 
             -- If the distance sensor detect something in front the Time_Next variable is set to the clock time plus the D variable.
@@ -40,28 +39,35 @@ package body Control_Program is
                   Time_Next := Clock + D;   
                   current_state := turn_right;  
                else
-                  Wheels.Drive_forward(Car);                                    
+                  Wheels.Drive_forward(Car);
                end if;
+               
             -- The turn_right case set the car to rotate clockwise.
+            -- If the accelerometer detect that the car has overturned the current_stat is set to turned.
+            -- If the car dosent overturn the car will rotate until the time_Now is more than Time_Next.
+            -- When Time_Now is more than Time_Next the current_state will switch to forward.
             when turn_right =>                                                   
                Wheels.Rotate_clockwise(car); 
-               if not(Acc_Storage_pk.storage.get_upright) then                  -- If the accelerometer detect that the car has overturned the current_stat is set to turned.
+               if not(Acc_Storage_pk.storage.get_upright) then                 
                   current_state := turned;
                end if; 
-               Time_Now := Clock;                                               -- If the car dosent overturn the car will rotate until the time_Now is more than Time_Next. 
-                  if (Time_Now > Time_Next) then                                -- When Time_Now is more than Time_Next the current_state will switch to forward.
+               Time_Now := Clock;                                                
+                  if (Time_Now > Time_Next) then                                
                   current_state := forward;
                end if; 
-            when turned =>                                                      -- The turned case set the car on brake wich mean that the wheels stop rotating.
+               
+            -- The turned case set the car on brake wich mean that the wheels stop rotating.
+            -- If the accelerometer detect that the car is upright then the current_state is set to forward.
+            when turned =>                                                      
                Wheels.Brake(Car); 
-               if (Acc_Storage_pk.storage.get_upright) then                     -- If the accelerometer detect that the car is upright then the current_state is set to forward.
+               if (Acc_Storage_pk.storage.get_upright) then                     
                   current_state := forward;
                end if;
          end case;
+         
          delay until Clock + Microseconds(500);
+         
       end loop;
       
    end Control_Car;
-
-  
 end Control_Program;
